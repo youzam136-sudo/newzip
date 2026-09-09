@@ -37,7 +37,7 @@
               : `<div class="tile-placeholder"></div>`}
           </div>
         </div>
-        <div class="tile-link">자세히</div>
+        <div class="tile-link">explore</div>
       </div>
       <div class="tile-tags">${tags.map(t => `<span>#${t}</span>`).join('')}</div>
     `;
