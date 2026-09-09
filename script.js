@@ -135,8 +135,8 @@
       ));
       const bScatter = bProgress > 0.35 ? (bProgress - 0.35) / 0.65 : 0;
       const spans = b.querySelectorAll('span');
-      if (spans[0]) spans[0].style.transform = `translate(${-bScatter * 120}px, ${-bScatter * 100}px)`;
-      if (spans[1]) spans[1].style.transform = `translate(${bScatter * 120}px, ${bScatter * 100}px)`;
+      if (spans[0]) spans[0].style.transform = `translate(${-bScatter * 220}px, ${-bScatter * 180}px)`;
+      if (spans[1]) spans[1].style.transform = `translate(${bScatter * 220}px, ${bScatter * 180}px)`;
     });
   }
   outer.addEventListener('scroll', () => requestAnimationFrame(updateParallax));
