@@ -30,10 +30,12 @@
         <div class="tile-title">${item.name}</div>
       </div>
       <div class="tile-image">
-        <div class="tile-visual">
-          ${item.img
-            ? `<img src="${item.img}" alt="${item.name}">`
-            : `<div class="tile-placeholder"></div>`}
+        <div class="tile-image-inner">
+          <div class="tile-visual">
+            ${item.img
+              ? `<img src="${item.img}" alt="${item.name}">`
+              : `<div class="tile-placeholder"></div>`}
+          </div>
         </div>
         <div class="tile-link">자세히</div>
       </div>
@@ -99,29 +101,33 @@
     outer.scrollLeft = scrollStart - (e.pageX - startX);
   });
 
-  // 스크롤할 때마다 카드 하나하나가 부드럽게 위아래로 움직이고, 넘버·제목 글씨가 위아래로 갈라지는 효과
-  function updateParallax(){
-    const outerRect = outer.getBoundingClientRect();
+  // 스크롤 "속도"에 반응해서 카드가 확 튕겼다가 부드럽게 가라앉는 효과
+  const wobbleFactors = PORTFOLIO_ITEMS.map(() => (Math.random() * 2 - 1));
+  let lastScrollLeft = outer.scrollLeft;
+  let velocity = 0;
+
+  outer.addEventListener('scroll', () => {
+    velocity += (outer.scrollLeft - lastScrollLeft);
+    lastScrollLeft = outer.scrollLeft;
+  });
+
+  function tick(){
+    velocity *= 0.86; // 점점 가라앉음
     const tiles = document.querySelectorAll('.portfolio-tile');
+    const outerRect = outer.getBoundingClientRect();
     tiles.forEach((tile, i) => {
+      const factor = wobbleFactors[i];
+      const ty = velocity * factor * 0.35;
+      const rot = velocity * factor * 0.03;
+      tile.style.transform = `translateY(${ty}px) rotate(${rot}deg)`;
+
       const r = tile.getBoundingClientRect();
       const tileCenter = r.left + r.width / 2;
       const outerCenter = outerRect.left + outerRect.width / 2;
       const delta = (tileCenter - outerCenter) / window.innerWidth;
-
-      // 카드마다 위상을 다르게 줘서 개별적으로 물결치듯 움직이게
-      const wave = Math.sin(outer.scrollLeft * 0.004 + i * 1.1) * 16;
-      tile.style.transform = `translateY(${wave}px)`;
-
-      const num = tile.querySelector('.tile-num');
-      const title = tile.querySelector('.tile-title');
-      if (num) num.style.transform = `translateY(${wave * 0.6}px)`;
-      if (title) title.style.transform = `translateY(${-wave * 0.6}px)`;
-
       const visual = tile.querySelector('.tile-visual');
-      if (visual) visual.style.transform = `translateX(${-delta * 46}px) translateY(${-wave * 0.3}px)`;
+      if (visual) visual.style.transform = `translateX(${-delta * 46}px)`;
     });
+    requestAnimationFrame(tick);
   }
-  outer.addEventListener('scroll', () => requestAnimationFrame(updateParallax));
-  window.addEventListener('resize', updateParallax);
-  updateParallax();
+  tick();
