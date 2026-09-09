@@ -151,9 +151,9 @@
     margin-bottom: 14px;
   }
   .glass-desc{
-    font-size: 13px;
-    color: var(--cream-dim);
-    max-width: 480px;
+    font-size: 16px;
+    color: #fff;
+    max-width: 613px;
     line-height:1.8;
   }
 
