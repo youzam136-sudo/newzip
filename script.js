@@ -1,7 +1,18 @@
 
+  // 문의 섹션 배경 슬라이드쇼
+  const contactSlides = document.querySelectorAll('.contact-bg-slide');
+  let contactSlideIdx = 0;
+  if (contactSlides.length > 1) {
+    setInterval(() => {
+      contactSlides[contactSlideIdx].classList.remove('active');
+      contactSlideIdx = (contactSlideIdx + 1) % contactSlides.length;
+      contactSlides[contactSlideIdx].classList.add('active');
+    }, 4000);
+  }
+
   // 포트폴리오 데이터 — img: 카드 썸네일, popupImg: 클릭하면 뜨는 팝업 이미지(없으면 img 사용)
   const PORTFOLIO_ITEMS = [
-    { name: '벨리안',       category: '쇼핑몰 개발',            img: 'assets/portfolio-belian.png', popupImg: 'assets/portfolio-belian.png' },
+    { name: '벨리안',       category: '쇼핑몰 개발',            img: 'assets/portfolio-belian.png', popupImg: 'assets/portfolio-belian-full.png' },
     { name: '주문집사',     category: '앱 UI/UX',              img: 'assets/thumb-orderbutler.png', popupImg: 'assets/portfolio-orderbutler.png' },
     { name: '도원',         category: '중장비 홈페이지 · WordPress', img: 'assets/thumb-dowon.png', popupImg: 'assets/portfolio-dowon.png' },
     { name: '이에프티',     category: '기업 홈페이지 · WordPress', img: 'assets/thumb-eft.png', popupImg: 'assets/portfolio-eft.png' },
