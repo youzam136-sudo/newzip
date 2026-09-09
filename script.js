@@ -101,33 +101,31 @@
     outer.scrollLeft = scrollStart - (e.pageX - startX);
   });
 
-  // 스크롤 "속도"에 반응해서 카드가 확 튕겼다가 부드럽게 가라앉는 효과
-  const wobbleFactors = PORTFOLIO_ITEMS.map(() => (Math.random() * 2 - 1));
-  let lastScrollLeft = outer.scrollLeft;
-  let velocity = 0;
+  // 원본 데모와 동일한 방식: 카드가 화면 왼쪽으로 빠져나갈 때(진행률 0.6 이후) 회전하며 확 튀어나가는 효과
+  const rotations2 = PORTFOLIO_ITEMS.map(() => (Math.random() * 2 - 1) * 30);
+  const translations2 = PORTFOLIO_ITEMS.map(() => (Math.random() * 2 - 1) * 90);
 
-  outer.addEventListener('scroll', () => {
-    velocity += (outer.scrollLeft - lastScrollLeft);
-    lastScrollLeft = outer.scrollLeft;
-  });
-
-  function tick(){
-    velocity *= 0.86; // 점점 가라앉음
-    const tiles = document.querySelectorAll('.portfolio-tile');
+  function updateParallax(){
     const outerRect = outer.getBoundingClientRect();
+    const tiles = document.querySelectorAll('.portfolio-tile');
     tiles.forEach((tile, i) => {
-      const factor = wobbleFactors[i];
-      const ty = velocity * factor * 0.35;
-      const rot = velocity * factor * 0.03;
-      tile.style.transform = `translateY(${ty}px) rotate(${rot}deg)`;
-
       const r = tile.getBoundingClientRect();
       const tileCenter = r.left + r.width / 2;
       const outerCenter = outerRect.left + outerRect.width / 2;
       const delta = (tileCenter - outerCenter) / window.innerWidth;
       const visual = tile.querySelector('.tile-visual');
       if (visual) visual.style.transform = `translateX(${-delta * 46}px)`;
+
+      // 진행률(0=오른쪽에서 등장, 1=왼쪽으로 완전히 퇴장)
+      const progress = Math.min(1, Math.max(0,
+        (outerRect.right - r.left) / (outerRect.width + r.width)
+      ));
+      const scatter = progress > 0.6 ? (progress - 0.6) / 0.4 : 0;
+      const rot = scatter * rotations2[i];
+      const ty = scatter * translations2[i];
+      tile.style.transform = `translateY(${ty}%) rotate(${rot}deg)`;
     });
-    requestAnimationFrame(tick);
   }
-  tick();
+  outer.addEventListener('scroll', () => requestAnimationFrame(updateParallax));
+  window.addEventListener('resize', updateParallax);
+  updateParallax();
