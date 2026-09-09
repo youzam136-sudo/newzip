@@ -538,8 +538,8 @@
     color: var(--cream);
     font-family: var(--sans);
     font-weight: 700;
-    font-size: clamp(28px,3.8vw,40px);
-    line-height:1.4;
+    font-size: clamp(28px, 3.8vw, 70px);
+    line-height: 1.4;
   }
   .contact-squiggle{ display:block; margin: 6px 0 60px; opacity: 0.85; }
   .contact-row{
@@ -555,7 +555,7 @@
   }
   .contact-info-block{
     font-family: var(--sans);
-    font-size: 13.5px;
+    font-size: 16.5px;
     line-height: 1.8;
     color: var(--cream-dim);
   }
