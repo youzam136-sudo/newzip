@@ -29,7 +29,7 @@
 
   /* ---------- shared ---------- */
   .wrap{
-    max-width: 880px;
+    max-width: 1700px;
     margin: 0 auto;
     padding: 0 28px;
   }
@@ -91,7 +91,7 @@
   .hero-logo img{
     display:inline-block;
     width: 100%;
-    max-width: 900px;
+    max-width: 1920px;
     height: auto;
   }
 
