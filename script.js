@@ -14,7 +14,7 @@
 
   const startBookend = document.createElement('div');
   startBookend.className = 'gallery-bookend';
-  startBookend.innerHTML = '<span>works</span><span>2016—</span>';
+  startBookend.innerHTML = '<span>works</span><span>2026—</span>';
   track.appendChild(startBookend);
 
   const rotations = PORTFOLIO_ITEMS.map(() => (Math.random() * 2 - 1) * 16);
@@ -25,16 +25,18 @@
     tile.className = 'portfolio-tile';
     const tags = item.category.split(' · ');
     tile.innerHTML = `
-      <div class="tile-num">${String(i + 1).padStart(2, '0')}</div>
-      <div class="tile-title">${item.name}</div>
+      <div class="tile-header">
+        <div class="tile-num">${String(i + 1).padStart(2, '0')}</div>
+        <div class="tile-title">${item.name}</div>
+      </div>
       <div class="tile-image">
         <div class="tile-visual">
           ${item.img
             ? `<img src="${item.img}" alt="${item.name}">`
             : `<div class="tile-placeholder"></div>`}
         </div>
+        <div class="tile-link">자세히</div>
       </div>
-      <div class="tile-link">자세히</div>
       <div class="tile-tags">${tags.map(t => `<span>#${t}</span>`).join('')}</div>
     `;
     tile.addEventListener('click', () => openLightbox(item));
@@ -43,7 +45,7 @@
 
   const endBookend = document.createElement('div');
   endBookend.className = 'gallery-bookend';
-  endBookend.innerHTML = '<span>plates</span><span>—now</span>';
+  endBookend.innerHTML = '<span>plates</span><span>—2026</span>';
   track.appendChild(endBookend);
 
   const lightbox = document.getElementById('lightbox');
@@ -97,37 +99,27 @@
     outer.scrollLeft = scrollStart - (e.pageX - startX);
   });
 
-  // 스크롤 진행률에 따른 이미지 패럴랙스 + 카드가 화면을 빠져나갈 때 흩어지는 효과
+  // 스크롤할 때마다 카드 하나하나가 부드럽게 위아래로 움직이고, 넘버·제목 글씨가 위아래로 갈라지는 효과
   function updateParallax(){
     const outerRect = outer.getBoundingClientRect();
     const tiles = document.querySelectorAll('.portfolio-tile');
     tiles.forEach((tile, i) => {
       const r = tile.getBoundingClientRect();
-
-      // 이미지 레이어 패럴랙스 (카드 중심이 컨테이너 중심에서 얼마나 떨어져 있는지)
       const tileCenter = r.left + r.width / 2;
       const outerCenter = outerRect.left + outerRect.width / 2;
       const delta = (tileCenter - outerCenter) / window.innerWidth;
+
+      // 카드마다 위상을 다르게 줘서 개별적으로 물결치듯 움직이게
+      const wave = Math.sin(outer.scrollLeft * 0.004 + i * 1.1) * 16;
+      tile.style.transform = `translateY(${wave}px)`;
+
+      const num = tile.querySelector('.tile-num');
+      const title = tile.querySelector('.tile-title');
+      if (num) num.style.transform = `translateY(${wave * 0.6}px)`;
+      if (title) title.style.transform = `translateY(${-wave * 0.6}px)`;
+
       const visual = tile.querySelector('.tile-visual');
-      if (visual) visual.style.transform = `translateX(${-delta * 46}px)`;
-
-      // 진행률(0=오른쪽에서 등장, 1=왼쪽으로 완전히 퇴장)
-      const progress = Math.min(1, Math.max(0,
-        (outerRect.right - r.left) / (outerRect.width + r.width)
-      ));
-      const scatter = progress > 0.62 ? (progress - 0.62) / 0.38 : 0;
-      const rot = scatter * rotations[i];
-      const ty = scatter * translations[i];
-      tile.style.transform = `translateY(${ty}%) rotate(${rot}deg)`;
-    });
-
-    // 시작/끝 대형 텍스트도 살짝 세로로 흔들리게
-    const bookends = document.querySelectorAll('.gallery-bookend');
-    const shift = (outer.scrollLeft % 400) / 400;
-    bookends.forEach((b, i) => {
-      const spans = b.querySelectorAll('span');
-      spans[0].style.transform = `translateY(${(i === 0 ? -1 : 1) * shift * 10}px)`;
-      spans[1].style.transform = `translateY(${(i === 0 ? 1 : -1) * shift * 10}px)`;
+      if (visual) visual.style.transform = `translateX(${-delta * 46}px) translateY(${-wave * 0.3}px)`;
     });
   }
   outer.addEventListener('scroll', () => requestAnimationFrame(updateParallax));
