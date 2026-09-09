@@ -1,13 +1,13 @@
 
-  // 포트폴리오 데이터 — img를 실제 이미지 URL로 채우면 자동으로 사진이 표시됩니다.
+  // 포트폴리오 데이터 — img: 카드 썸네일, popupImg: 클릭하면 뜨는 팝업 이미지(없으면 img 사용)
   const PORTFOLIO_ITEMS = [
-    { name: '선두금속',     category: '기업 홈페이지 · WordPress', img: '' },
-    { name: '주문집사',     category: '앱 UI/UX',              img: '' },
-    { name: '벨리안',       category: '쇼핑몰 개발',            img: '' },
-    { name: 'MZBK EMS',   category: '대시보드 · React',        img: '' },
-    { name: 'ONETWO',     category: '이커머스 · React',        img: '' },
-    { name: '공사록',       category: '앱 UI/UX · Figma',       img: '' },
-    { name: '천안거미크레인', category: '산업 홈페이지 · WordPress', img: '' },
+    { name: '벨리안',       category: '쇼핑몰 개발',            img: 'assets/portfolio-belian.png', popupImg: 'assets/portfolio-belian.png' },
+    { name: '주문집사',     category: '앱 UI/UX',              img: 'assets/thumb-orderbutler.png', popupImg: 'assets/portfolio-orderbutler.png' },
+    { name: '도원',         category: '중장비 홈페이지 · WordPress', img: 'assets/thumb-dowon.png', popupImg: 'assets/portfolio-dowon.png' },
+    { name: '이에프티',     category: '기업 홈페이지 · WordPress', img: 'assets/thumb-eft.png', popupImg: 'assets/portfolio-eft.png' },
+    { name: '포웨이브',     category: '솔루션 홈페이지 · WordPress', img: 'assets/thumb-fowave.png', popupImg: 'assets/portfolio-fowave.png' },
+    { name: '이사대학',     category: '서비스 홈페이지 · WordPress', img: 'assets/thumb-movinguniv.png', popupImg: 'assets/portfolio-movinguniv.png' },
+    { name: 'B&M 컴퍼니',  category: '기업 홈페이지 · WordPress', img: 'assets/thumb-bnm.png', popupImg: 'assets/portfolio-bnm.png' },
   ];
 
   const track = document.getElementById('portfolioTrack');
@@ -55,8 +55,9 @@
   const lightboxCaption = document.getElementById('lightboxCaption');
 
   function openLightbox(item){
-    if(item.img){
-      lightboxImg.src = item.img;
+    const src = item.popupImg || item.img;
+    if(src){
+      lightboxImg.src = src;
       lightboxImg.style.display = 'block';
     } else {
       lightboxImg.style.display = 'none';
@@ -135,8 +136,8 @@
       ));
       const bScatter = bProgress > 0.35 ? (bProgress - 0.35) / 0.65 : 0;
       const spans = b.querySelectorAll('span');
-      if (spans[0]) spans[0].style.transform = `translate(${-bScatter * 220}px, ${-bScatter * 180}px)`;
-      if (spans[1]) spans[1].style.transform = `translate(${bScatter * 220}px, ${bScatter * 180}px)`;
+      if (spans[0]) spans[0].style.transform = `translate(${-bScatter * 380}px, ${-bScatter * 300}px)`;
+      if (spans[1]) spans[1].style.transform = `translate(${bScatter * 380}px, ${bScatter * 300}px)`;
     });
   }
   outer.addEventListener('scroll', () => requestAnimationFrame(updateParallax));
