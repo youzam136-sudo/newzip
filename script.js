@@ -143,6 +143,6 @@
       if (spans[1]) spans[1].style.transform = `translate(${bScatter * 90}px, ${bScatter * 70}px)`;
     });
   }
-  outer.addEventListener('scroll', () => requestAnimationFrame(updateParallax));
+ outer.addEventListener('scroll', () => requestAnimationFrame(updateParallax));
   window.addEventListener('resize', updateParallax);
-  updateParallax();
+  (function loop(){ updateParallax(); requestAnimationFrame(loop); })();
