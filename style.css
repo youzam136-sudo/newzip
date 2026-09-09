@@ -206,8 +206,7 @@
     max-width: 12em;
   }
   .hero-sub{
-    margin-top: 28px;
-    max-width: 480px;
+    max-width: 495px;
     font-size: 16.5px;
     color: var(--cream-dim);
   }
