@@ -334,6 +334,9 @@
   .portfolio-band{
     background: #0B121C;
     overflow: hidden;
+    min-height: 100vh;
+    display:flex;
+    align-items:center;
     --demo-cyan: #38E4F0;
     --demo-pink: #EF4E93;
     --demo-card: #16212F;
@@ -353,9 +356,8 @@
     overflow-y: hidden;
     scrollbar-width: none;
     cursor: grab;
+    width: 100%;
     height: 82vh;
-    min-height: 480px;
-    max-height: 720px;
     user-select: none;
   }
   .portfolio-track-outer.dragging{ cursor: grabbing; }
