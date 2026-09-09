@@ -1,14 +1,4 @@
 
-  // 문의 섹션 배경 슬라이드쇼
-  const contactSlides = document.querySelectorAll('.contact-bg-slide');
-  let contactSlideIdx = 0;
-  if (contactSlides.length > 1) {
-    setInterval(() => {
-      contactSlides[contactSlideIdx].classList.remove('active');
-      contactSlideIdx = (contactSlideIdx + 1) % contactSlides.length;
-      contactSlides[contactSlideIdx].classList.add('active');
-    }, 4000);
-  }
 
   // 포트폴리오 데이터 — img: 카드 썸네일, popupImg: 클릭하면 뜨는 팝업 이미지(없으면 img 사용)
   const PORTFOLIO_ITEMS = [
