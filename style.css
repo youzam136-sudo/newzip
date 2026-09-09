@@ -522,23 +522,18 @@
 
   /* ---------- contact ---------- */
   .contact-band{
-    padding: 100px 0 90px;
-    background: #05070c;
+    min-height: 78vh;
+    display:flex;
+    align-items:center;
+    background: radial-gradient(ellipse 90% 75% at 14% 18%, #1a3fe0 0%, #0b1440 32%, #05070d 62%, #000000 100%);
     color: var(--cream);
     position: relative;
     overflow: hidden;
   }
-  .contact-bg{
-    position:absolute; inset:0; z-index:0;
-    background-size: cover;
-    background-position: center;
+  .contact-cluster{
+    max-width: 640px;
+    margin: 0 auto;
   }
-  .contact-bg::after{
-    content:'';
-    position:absolute; inset:0;
-    background: rgba(2,3,8,0.92);
-  }
-  .contact-band .wrap{ position:relative; z-index:1; }
   .contact-title{
     color: var(--cream);
     font-family: var(--sans);
@@ -550,9 +545,8 @@
   .contact-row{
     display:flex;
     align-items:center;
-    justify-content:space-between;
+    gap: 60px;
     flex-wrap:wrap;
-    gap: 24px;
   }
   .contact-info-inline{
     display:flex;
