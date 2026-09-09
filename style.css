@@ -365,10 +365,10 @@
   .portfolio-track{
     display:flex;
     align-items:center;
-    gap: 60px;
+    gap: 125px;
     width: max-content;
     height: 100%;
-    padding: 0 0 0 0;
+    padding: 0 10vw;
   }
   .gallery-bookend{
     display:flex;
@@ -389,7 +389,7 @@
 
   .portfolio-tile{
     flex: 0 0 auto;
-    width: min(46vw, 380px);
+    width: min(46vw, 440px);
     height: 82%;
     display:flex;
     flex-direction:column;
@@ -442,7 +442,7 @@
     position:absolute;
     left: -18px;
     bottom: -18px;
-    width: 68px; height: 68px;
+    width: 100px; height: 100px;
     border-radius: 50%;
     background: var(--rust);
     color: #fff;
