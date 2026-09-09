@@ -66,7 +66,7 @@
     color: var(--cream);
     position:relative;
     overflow:hidden;
-    padding: 40px 0 70px;
+    padding: 40px 0 140px;
   }
   .hero-inner{ position:relative; z-index:1; }
   .hero-top{
@@ -98,7 +98,7 @@
   .hero-visual{ background: var(--navy); padding: 0 28px 70px; }
   .hero-visual-img{ width:100%; height:auto; display:block; }
 
-  .hero-statement{ background: var(--navy); color: var(--cream); text-align:center; padding: 40px 28px 100px; }
+  .hero-statement{ background: var(--navy); color: var(--cream); text-align:center; padding: 290px 28px 100px; }
   .hero-statement h1{ max-width:none; margin:0 auto; }
   .hero-statement .hero-sub{ margin:24px auto 0; }
 
