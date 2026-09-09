@@ -73,9 +73,13 @@
   lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
 
-  // 세로 휠 → 가로 스크롤 변환 + 드래그 스크롤 (끝까지 스크롤되면 휠을 놓아줘서 다음 섹션으로 넘어감)
+  // 세로 휠 → 가로 스크롤 변환 + 드래그 스크롤 (이 구간이 화면에 충분히 들어왔을 때만 작동, 끝까지 스크롤되면 놓아줌)
   const outer = document.getElementById('portfolioOuter');
   outer.addEventListener('wheel', (e) => {
+    const r = outer.getBoundingClientRect();
+    const isEngaged = r.top < window.innerHeight * 0.25 && r.bottom > window.innerHeight * 0.75;
+    if (!isEngaged) return; // 아직 이 구간이 화면을 다 채우기 전이면 기본 세로 스크롤 유지
+
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
       const atStart = outer.scrollLeft <= 0;
       const atEnd = outer.scrollLeft + outer.clientWidth >= outer.scrollWidth - 1;
@@ -135,8 +139,8 @@
       ));
       const bScatter = bProgress > 0.55 ? (bProgress - 0.55) / 0.45 : 0;
       const spans = b.querySelectorAll('span');
-      if (spans[0]) spans[0].style.transform = `translateY(${-bScatter * 70}px)`;
-      if (spans[1]) spans[1].style.transform = `translateY(${bScatter * 70}px)`;
+      if (spans[0]) spans[0].style.transform = `translate(${-bScatter * 90}px, ${-bScatter * 70}px)`;
+      if (spans[1]) spans[1].style.transform = `translate(${bScatter * 90}px, ${bScatter * 70}px)`;
     });
   }
   outer.addEventListener('scroll', () => requestAnimationFrame(updateParallax));
