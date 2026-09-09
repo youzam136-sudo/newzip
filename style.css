@@ -1,6 +1,6 @@
 
   :root{
-    --navy: #0A0A0A;
+    --navy: #000000;
     --navy-deep: #000000;
     --line: rgba(255,255,255,0.45);
     --line-dim: rgba(255,255,255,0.16);
@@ -98,7 +98,7 @@
   .hero-visual{ background: var(--navy); padding: 0 28px 70px; }
   .hero-visual-img{ width:100%; height:auto; display:block; }
 
-  .hero-statement{ background: var(--navy); color: var(--cream); text-align:center; padding: 290px 28px 100px; }
+  .hero-statement{ background: var(--navy); color: var(--cream); text-align:center; padding: 290px 28px 290px; }
   .hero-statement h1{ max-width:none; margin:0 auto; }
   .hero-statement .hero-sub{ margin:24px auto 0; }
 
@@ -517,9 +517,28 @@
   /* ---------- contact ---------- */
   .contact-band{
     padding: 84px 0 70px;
-    background: linear-gradient(160deg, var(--navy) 0%, #0d1420 100%);
+    background: var(--navy);
     color: var(--cream);
+    position: relative;
+    overflow: hidden;
   }
+  .contact-bg-slideshow{
+    position:absolute; inset:0; z-index:0;
+  }
+  .contact-bg-slide{
+    position:absolute; inset:0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.6s ease;
+  }
+  .contact-bg-slide.active{ opacity: 1; }
+  .contact-bg-slideshow::after{
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(160deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.75) 100%);
+  }
+  .contact-band .wrap{ position:relative; z-index:1; }
   .contact-band .tickline{ background: var(--line-dim); }
   .contact-band .contact-title{ color: var(--cream); display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
   .contact-arrow{
@@ -550,14 +569,14 @@
     display:flex;
     width:max-content;
     gap: 22px;
-    animation: marqueeScroll 16s linear infinite;
+    animation: marqueeScroll 34s linear infinite;
   }
   .ticker-track span{
     font-family: var(--mono);
     font-weight: 700;
     font-size: 12.5px;
     letter-spacing: 0.04em;
-    color: #111;
+    color: #fff;
     white-space:nowrap;
   }
   .contact-grid{
