@@ -368,7 +368,7 @@
     gap: 60px;
     width: max-content;
     height: 100%;
-    padding: 0 10vw;
+    padding: 0 0 0 0;
   }
   .gallery-bookend{
     display:flex;
@@ -381,7 +381,7 @@
     font-family: var(--display);
     font-style: italic;
     font-weight: 600;
-    font-size: 11vw;
+    font-size: 13.5vw;
     color: transparent;
     -webkit-text-stroke: 1px var(--line);
     white-space: nowrap;
