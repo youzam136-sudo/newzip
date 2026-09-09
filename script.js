@@ -1,5 +1,36 @@
 
 
+  // 서비스 소개 배너 슬라이드쇼 — 배너 추가하려면 이 배열에 항목만 더 넣으면 됩니다.
+  const GLASS_SLIDES = [
+    {
+      img: 'assets/glass-bg.png',
+      title: '웹 퍼블리싱 · 프론트엔드 개발',
+      desc: '아임웹, 카페24, 워드프레스(엘리멘터) 기반 퍼블리싱과 React·TypeScript·Next.js·Vite 기반 개발을 함께 진행합니다. 완성 후 담당자가 직접 콘텐츠를 수정할 수 있도록 인수인계까지 포함합니다.'
+    }
+  ];
+  const glassSlideshow = document.getElementById('glassSlideshow');
+  GLASS_SLIDES.forEach((slide, i) => {
+    const el = document.createElement('div');
+    el.className = 'glass-slide' + (i === 0 ? ' active' : '');
+    el.style.backgroundImage = `url('${slide.img}')`;
+    el.innerHTML = `
+      <div class="glass-overlay">
+        <div class="glass-title">${slide.title}</div>
+        <div class="glass-desc">${slide.desc}</div>
+      </div>
+    `;
+    glassSlideshow.appendChild(el);
+  });
+  if (GLASS_SLIDES.length > 1) {
+    let glassIdx = 0;
+    const glassEls = glassSlideshow.querySelectorAll('.glass-slide');
+    setInterval(() => {
+      glassEls[glassIdx].classList.remove('active');
+      glassIdx = (glassIdx + 1) % glassEls.length;
+      glassEls[glassIdx].classList.add('active');
+    }, 5000);
+  }
+
   // 포트폴리오 데이터 — img: 카드 썸네일, popupImg: 클릭하면 뜨는 팝업 이미지(없으면 img 사용)
   const PORTFOLIO_ITEMS = [
     { name: '벨리안',       category: '쇼핑몰 개발',            img: 'assets/portfolio-belian.png', popupImg: 'assets/portfolio-belian-full.png' },
