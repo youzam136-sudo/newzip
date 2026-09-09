@@ -125,6 +125,19 @@
       const ty = scatter * translations2[i];
       tile.style.transform = `translateY(${ty}%) rotate(${rot}deg)`;
     });
+
+    // 시작/끝 워드마크도 같은 원리로 위아래로 갈라지게
+    const bookends = document.querySelectorAll('.gallery-bookend');
+    bookends.forEach((b) => {
+      const br = b.getBoundingClientRect();
+      const bProgress = Math.min(1, Math.max(0,
+        (outerRect.right - br.left) / (outerRect.width + br.width)
+      ));
+      const bScatter = bProgress > 0.55 ? (bProgress - 0.55) / 0.45 : 0;
+      const spans = b.querySelectorAll('span');
+      if (spans[0]) spans[0].style.transform = `translateY(${-bScatter * 70}px)`;
+      if (spans[1]) spans[1].style.transform = `translateY(${bScatter * 70}px)`;
+    });
   }
   outer.addEventListener('scroll', () => requestAnimationFrame(updateParallax));
   window.addEventListener('resize', updateParallax);
