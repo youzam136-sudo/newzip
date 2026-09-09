@@ -118,17 +118,23 @@
     line-height: 1.9;
   }
 
-  /* ---------- glass service panel ---------- */
+  /* ---------- glass service panel (슬라이드쇼) ---------- */
   .glass-panel{ background: var(--navy); padding: 0 0 0; }
-  .glass-visual{
+  .glass-slideshow{
     position:relative;
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow:hidden;
+  }
+  .glass-slide{
+    position:absolute; inset:0;
     background-size: cover;
     background-position: center;
+    opacity: 0;
+    transition: opacity 1.2s ease;
   }
-  .glass-visual::before{
+  .glass-slide.active{ opacity: 1; }
+  .glass-slide::before{
     content:'';
     position:absolute; inset:0;
     background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
@@ -618,10 +624,10 @@
   .footer-statement{
     font-family: var(--sans);
     font-weight:800;
-    font-size: clamp(20px, 2.8vw, 30px);
+    font-size: clamp(20px, 2.8vw, 40px);
     line-height: 1.45;
     color: var(--cream);
-    max-width: 420px;
+    max-width: 454px;
   }
   .footer-links{
     display:flex;
@@ -644,7 +650,7 @@
   }
   .footer-wordmark img{
     width: 100%;
-    max-width: 900px;
+    max-width: 1800px;
     height: auto;
   }
   .footer-bottom{
