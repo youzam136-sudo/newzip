@@ -334,7 +334,7 @@
   .portfolio-band{
     background: #0B121C;
     overflow: hidden;
-    min-height: 100vh;
+    min-height: 110vh;
     display:flex;
     align-items:center;
     --demo-cyan: #38E4F0;
