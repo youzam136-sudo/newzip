@@ -342,7 +342,7 @@
   .portfolio-band .sheet-label{ color: var(--line); }
   .portfolio-band .section-title{ color: var(--cream); }
   .portfolio-band .portfolio-hint{ color: var(--cream-dim); }
-  .portfolio-band .tile-image{ background: var(--demo-card); }
+  .portfolio-band .tile-image-inner{ background: var(--demo-card); }
   .portfolio-band .tile-placeholder{ background: linear-gradient(155deg, var(--demo-card) 0%, #0e1620 100%); }
   .portfolio-band .tile-num{ color: var(--demo-cyan); }
   .portfolio-band .tile-link{ background: var(--demo-pink); border-color: var(--demo-pink); color: #fff; }
@@ -388,10 +388,7 @@
     display:flex;
     flex-direction:column;
     cursor: pointer;
-    transition: transform .12s linear;
   }
-  .tile-num, .tile-title{ transition: transform .12s linear; }
-  .tile-visual{ transition: transform .12s linear; }
   .tile-header{
     display:flex;
     align-items:baseline;
@@ -417,7 +414,12 @@
   .tile-image{
     position: relative;
     flex: 1 1 auto;
-    overflow: hidden;
+    overflow: visible;
+  }
+  .tile-image-inner{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
     background: var(--navy-deep);
   }
   .tile-visual{
