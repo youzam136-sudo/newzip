@@ -418,7 +418,7 @@
     font-family: var(--display);
     font-style: italic;
     font-weight: 500;
-    font-size: clamp(18px, 1.7vw, 24px);
+    font-size: clamp(20px, 2vw, 27px);
     color: var(--cream-dim);
     line-height: 1;
   }
@@ -463,9 +463,9 @@
     margin-top: 34px;
     display:flex;
     justify-content:flex-end;
-    gap: 10px;
+    gap: 12px;
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 14px;
     color: var(--line);
   }
 
