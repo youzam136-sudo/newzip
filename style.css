@@ -60,6 +60,17 @@
 
   section{ position:relative; }
 
+  /* ---------- 스크롤 페이드인 ---------- */
+  .reveal{
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .9s ease, transform .9s ease;
+  }
+  .reveal.in-view{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* ---------- hero ---------- */
   .hero{
     background: var(--navy);
@@ -538,8 +549,8 @@
     color: var(--cream);
     font-family: var(--sans);
     font-weight: 700;
-    font-size: clamp(28px, 3.8vw, 70px);
-    line-height: 1.4;
+    font-size: clamp(28px,3.8vw,40px);
+    line-height:1.4;
   }
   .contact-squiggle{ display:block; margin: 6px 0 60px; opacity: 0.85; }
   .contact-row{
@@ -555,7 +566,7 @@
   }
   .contact-info-block{
     font-family: var(--sans);
-    font-size: 16.5px;
+    font-size: 13.5px;
     line-height: 1.8;
     color: var(--cream-dim);
   }
@@ -653,15 +664,6 @@
     color: var(--cream-dim);
   }
 
-  @media (max-width: 860px){
-    .cap-grid{ grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 640px){
-    .cap-grid{ grid-template-columns: 1fr; }
-    .prop-grid{ grid-template-columns: 1fr; }
-    .hero-dims{ grid-template-columns: 1fr 1fr; }
-    .case-row{ grid-template-columns: 1fr; gap:6px; }
-  }
   @media (max-width: 860px){
     .cap-grid{ grid-template-columns: repeat(2, 1fr); }
   }
