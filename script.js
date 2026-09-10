@@ -38,7 +38,7 @@
           : entry.target.querySelectorAll('.typewriter-wrap');
         wraps.forEach((wrap, wIdx) => {
           const lines = wrap.querySelectorAll('.tw-line');
-          setTimeout(() => typeSequence(lines, 55), wIdx * 900);
+          setTimeout(() => typeSequence(lines, 95), wIdx * 900);
         });
         revealObserver.unobserve(entry.target);
       }
