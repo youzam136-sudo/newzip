@@ -1,18 +1,29 @@
 
 
-  // 타이핑 애니메이션 — 텍스트가 한 글자씩 써지는 효과
-  document.querySelectorAll('.typewriter').forEach((el) => {
-    el.dataset.fullText = el.textContent;
-    el.textContent = '';
-  });
-  function typeText(el, text, speed){
+  // 타이핑 애니메이션 — 줄 단위로 순서대로, 깜빡이는 커서와 함께
+  function typeLine(el, text, speed, onDone){
+    el.classList.add('typing');
     let i = 0;
     (function step(){
       if (i <= text.length) {
         el.textContent = text.slice(0, i);
         i++;
         setTimeout(step, speed);
+      } else {
+        el.classList.remove('typing');
+        if (onDone) onDone();
       }
+    })();
+  }
+  function typeSequence(lines, speed){
+    let idx = 0;
+    (function next(){
+      if (idx >= lines.length) return;
+      const el = lines[idx];
+      typeLine(el, el.dataset.text, speed, () => {
+        idx++;
+        setTimeout(next, 300);
+      });
     })();
   }
 
@@ -22,11 +33,12 @@
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
-        const typers = entry.target.matches('.typewriter')
+        const wraps = entry.target.matches('.typewriter-wrap')
           ? [entry.target]
-          : entry.target.querySelectorAll('.typewriter');
-        typers.forEach((t, idx) => {
-          setTimeout(() => typeText(t, t.dataset.fullText, 28), idx * 400);
+          : entry.target.querySelectorAll('.typewriter-wrap');
+        wraps.forEach((wrap, wIdx) => {
+          const lines = wrap.querySelectorAll('.tw-line');
+          setTimeout(() => typeSequence(lines, 55), wIdx * 900);
         });
         revealObserver.unobserve(entry.target);
       }
