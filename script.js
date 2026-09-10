@@ -1,11 +1,33 @@
 
 
-  // 스크롤하면 요소들이 서서히 나타나는 페이드인
+  // 타이핑 애니메이션 — 텍스트가 한 글자씩 써지는 효과
+  document.querySelectorAll('.typewriter').forEach((el) => {
+    el.dataset.fullText = el.textContent;
+    el.textContent = '';
+  });
+  function typeText(el, text, speed){
+    let i = 0;
+    (function step(){
+      if (i <= text.length) {
+        el.textContent = text.slice(0, i);
+        i++;
+        setTimeout(step, speed);
+      }
+    })();
+  }
+
+  // 스크롤하면 요소들이 서서히 나타나는 페이드인 (+ 타이핑 요소는 함께 타이핑 시작)
   const revealEls = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
+        const typers = entry.target.matches('.typewriter')
+          ? [entry.target]
+          : entry.target.querySelectorAll('.typewriter');
+        typers.forEach((t, idx) => {
+          setTimeout(() => typeText(t, t.dataset.fullText, 28), idx * 400);
+        });
         revealObserver.unobserve(entry.target);
       }
     });
