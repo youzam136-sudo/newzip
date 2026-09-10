@@ -1,5 +1,17 @@
 
 
+  // 스크롤하면 요소들이 서서히 나타나는 페이드인
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach((el) => revealObserver.observe(el));
+
   // 서비스 소개 배너 슬라이드쇼 — 배너 추가하려면 이 배열에 항목만 더 넣으면 됩니다.
   const GLASS_SLIDES = [
     {
